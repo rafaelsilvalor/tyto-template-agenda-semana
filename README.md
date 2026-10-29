@@ -125,6 +125,9 @@ The tests, all without Tyto:
 - `tests/examples.test.ts`: the example brief compiled as Tyto compiles it, through
   `@tyto/template-kit/testing` (Tyto ADR 0152), against the HTML of each slide in
   `tests/__snapshots__/` — Tyto's own snapshots of the built-in copy, copied byte for byte.
+- `tests/faces.test.ts`: the manifest's `faces:` are exactly the faces the example sets.
+  Installed, the template measures in its plugin's process with those faces only (Tyto ADR
+  0048); one left out and a long session title shrinks instead of wrapping.
 - `tests/plugin.test.ts`: the built `dist/index.js`, loaded through
   `@tyto/plugin-api/testing` (Tyto ADR 0150), drawing a slide across the isolation protocol.
 

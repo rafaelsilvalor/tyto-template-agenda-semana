@@ -1,0 +1,7 @@
+{
+  "name": "agenda-semana",
+  "version": "1.0.0",
+  "engine": ">=0.9",
+  "contributes": ["template-pack"],
+  "permissions": ["font:CircularXX"]
+}

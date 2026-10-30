@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 
 import { noBrandKit } from '@tyto/core';
-import { PLUGIN_API_VERSION, satisfiesEngine } from '@tyto/plugin-api';
+import { NO_SHIPPED_FILES, PLUGIN_API_VERSION, satisfiesEngine } from '@tyto/plugin-api';
 import { testPlugin } from '@tyto/plugin-api/testing';
 import { afterAll, describe, expect, it } from 'vitest';
 
@@ -70,7 +70,7 @@ describe('the plugin', () => {
   });
 
   it('draws a slide from the bundle, a 1080×1350 frame, across the isolation protocol', async () => {
-    const answer = await build()('agenda-semana', call, []);
+    const answer = await build()('agenda-semana', call, [], NO_SHIPPED_FILES);
     if (!answer.ok) throw new Error(answer.error.map((item) => item.message).join('\n'));
 
     expect(answer.value.frame.size).toEqual({ w: 1080, h: 1350 });
@@ -78,7 +78,7 @@ describe('the plugin', () => {
   });
 
   it('refuses a template name it does not draw', async () => {
-    const answer = await build()('tabela', call, []);
+    const answer = await build()('tabela', call, [], NO_SHIPPED_FILES);
 
     expect(answer.ok).toBe(false);
     expect(answer.ok ? '' : answer.error.map((item) => item.message).join('\n')).toContain(

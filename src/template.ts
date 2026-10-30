@@ -5,9 +5,9 @@
  *
  * | band   | what                                          | drawn by                               |
  * | ------ | --------------------------------------------- | -------------------------------------- |
- * | header | the logo                                       | `header()` — `azul/`                   |
+ * | header | the logo                                       | `header()` — `azul`                   |
  * | middle | the cover (first slide only), then the table  | `titleBlock(coverTitle)`, `pillTable(sessionTable)` |
- * | footer | the signature, and the arrow unless last slide   | `footer()` — `azul/`                   |
+ * | footer | the signature, and the arrow unless last slide   | `footer()` — `azul`                   |
  * | seal   | last slide only, when the brief has a `selo`  | `sealed` — kit; `sealOf` — house       |
  *
  * `bandedPage` centres the middle between the header and the footer, whatever the brief put
@@ -18,11 +18,20 @@
 
 import { frame, solid } from '@tyto/core/template';
 import { sealOf } from '@tyto/house-style';
+import {
+  BAND,
+  EDGE,
+  GAP,
+  MARGIN,
+  PAPER,
+  accentOfAzul,
+  coverTitle,
+  footer,
+  hasNextSlide,
+  header,
+  sessionTable,
+} from '@tyto/house-style/azul';
 import { type Block, bandedPage, pillTable, stack, titleBlock, sealed } from '@tyto/template-kit';
-
-import { accentOfAzul, footer, hasNextSlide, header } from './azul/parts.js';
-import { coverTitle, sessionTable } from './azul/presets.js';
-import { BAND, EDGE, GAP, MARGIN, PAPER } from './azul/tokens.js';
 
 import type { RichText, TemplateBuild, TemplateContext } from '@tyto/core';
 

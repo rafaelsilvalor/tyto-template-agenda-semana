@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { build } from './template.js';
-import { ARROW, CHROME, INK } from './azul/tokens.js';
+import { ARROW, CHROME, INK } from '@tyto/house-style/azul';
 import { PLACEHOLDER_LOGO, PLACEHOLDER_SIGNATURE } from '@tyto/house-style';
 
 import { measureNothing, noBrandKit, noFiles, reportNothing } from '@tyto/core';

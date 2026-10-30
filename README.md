@@ -83,7 +83,7 @@ on the machine crosses only under this permission.
 ## What a configuration may change
 
 Nothing yet: the manifest declares no `values` (Tyto ADR 0153). The template moved from Tyto
-with the same bytes, and its colours and spacing are azul's tokens in `src/azul/tokens.ts`.
+with the same bytes, and its colours and spacing are azul's tokens in `@tyto/house-style/azul`.
 A configuration may still pick the brand kit, and so the accent (Tyto ADR 0155).
 
 ## Development
@@ -92,9 +92,8 @@ A configuration may still pick the brand kit, and so the accent (Tyto ADR 0155).
 `dist/index.js`, one ES module with every `@tyto` import inlined, which is committed and which
 CI rebuilds and compares.
 
-`src/azul/` is the azul brand's tokens, chrome and table look, copied from Tyto's shared
-`_azul/` folder and trimmed to what the agenda draws. `tyto-template-aprovados` holds the other
-copy.
+The azul brand's tokens, chrome and table look are `@tyto/house-style/azul`, shared with
+`tyto-template-aprovados` (Tyto TYTO-476): a change to the azul look lands once, in Tyto.
 
 The template depends on Tyto's published contract, held by GitHub Packages under the owner's
 scope (Tyto ADR 0149) and aliased in `package.json`: `@tyto/house-style` draws the logo, the
@@ -121,7 +120,6 @@ The tests, all without Tyto:
   sessions where the brief put them, the cover on the first slide only, the date pill over the
   grey pill, the marks' geometry, the signature on every slide and the arrow on all but the
   last.
-- `src/azul/presets.test.ts`: the session table reads a heading and its sessions out of one slot.
 - `tests/examples.test.ts`: the example brief compiled as Tyto compiles it, through
   `@tyto/template-kit/testing` (Tyto ADR 0152), against the HTML of each slide in
   `tests/__snapshots__/` — Tyto's own snapshots of the built-in copy, copied byte for byte.

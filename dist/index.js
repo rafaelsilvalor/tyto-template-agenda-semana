@@ -22176,7 +22176,7 @@ function shift(draft, dx, dy) {
   return at(dx, dy, block(0, 0, draft));
 }
 
-// node_modules/.pnpm/@rafaelsilvalor+tyto-house-style@0.3.0/node_modules/@rafaelsilvalor/tyto-house-style/dist/index.js
+// node_modules/.pnpm/@rafaelsilvalor+tyto-house-style@0.3.0/node_modules/@rafaelsilvalor/tyto-house-style/dist/chunk-EIGOHDOF.js
 var PLACEHOLDER_LOGO = {
   box: { w: 186.09, h: 376.79 },
   d: (
@@ -22218,6 +22218,8 @@ function accentOf(kit, fallback) {
 function signatureOf(kit) {
   return kit.signature ?? PLACEHOLDER_SIGNATURE;
 }
+
+// node_modules/.pnpm/@rafaelsilvalor+tyto-house-style@0.3.0/node_modules/@rafaelsilvalor/tyto-house-style/dist/index.js
 var TITLE_INK = "#7c7c7c";
 var ROW_INK = "#393939";
 var FACE = systemFont("CircularXX");
@@ -22274,7 +22276,7 @@ var TABLE_VALUE_DEFAULTS = {
   "signature-ink": SIGNATURE_INK
 };
 
-// src/azul/tokens.ts
+// node_modules/.pnpm/@rafaelsilvalor+tyto-house-style@0.3.0/node_modules/@rafaelsilvalor/tyto-house-style/dist/azul.js
 var PAPER2 = "#ffffff";
 var INK2 = "#009fe3";
 var COVER_INK = "#4a4a4a";
@@ -22349,8 +22351,6 @@ var ARROW = {
   d: `M${ARROW_SHAFT},377.81v-134.18H0v-108.75h${ARROW_SHAFT}V0l${ARROW_HEAD},189.26-${ARROW_HEAD},188.55Z`,
   fillRule: "nonzero"
 };
-
-// src/azul/parts.ts
 function accentOfAzul(kit) {
   return accentOf(kit, INK2);
 }
@@ -22384,8 +22384,6 @@ function footer(width, kit, options) {
 function hasNextSlide(artwork) {
   return artwork.index < artwork.count - 1;
 }
-
-// src/azul/presets.ts
 var style2 = (size, weight, color2) => ({
   font: FACE2,
   size,
@@ -22402,7 +22400,8 @@ function badge(options) {
       name: options.text,
       style: options.style,
       align: "center",
-      valign: "middle"
+      valign: "middle",
+      ...options.rewrite === void 0 ? {} : { rewrite: options.rewrite }
     }
   };
 }

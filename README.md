@@ -128,6 +128,9 @@ The tests, all without Tyto:
   0048); one left out and a long session title shrinks instead of wrapping.
 - `tests/plugin.test.ts`: the built `dist/index.js`, loaded through
   `@tyto/plugin-api/testing` (Tyto ADR 0150), drawing a slide across the isolation protocol.
+- `tests/seal.test.ts`: the house's seal as every house template with a grid takes it (Tyto
+  TYTO-480): with `selo:` the last slide carries it, 1080 × 140 at the foot, and the footer
+  rises by its height; the slides before the last are the seal-less brief's bytes.
 
 The `contract` workflow runs every day against the newest published contract, past the ranges
 `package.json` asks for, so a Tyto release that breaks this template turns it red before

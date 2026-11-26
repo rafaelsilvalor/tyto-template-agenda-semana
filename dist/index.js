@@ -1326,9 +1326,9 @@ var Class = class {
   constructor(..._args) {
   }
 };
-function members(proto, table) {
-  for (const key in table) {
-    const desc = Object.getOwnPropertyDescriptor(table, key);
+function members(proto, table2) {
+  for (const key in table2) {
+    const desc = Object.getOwnPropertyDescriptor(table2, key);
     if (desc.get)
       Object.defineProperty(proto, key, { ...desc, enumerable: false });
     else
@@ -1343,10 +1343,10 @@ function hide(inst, key, value) {
   return own(inst, key, value, false);
 }
 // @__NO_SIDE_EFFECTS__
-function derived(computes, table) {
+function derived(computes, table2) {
   for (const key in computes) {
     const compute = computes[key];
-    Object.defineProperty(table, key, {
+    Object.defineProperty(table2, key, {
       configurable: true,
       enumerable: true,
       get() {
@@ -1357,7 +1357,7 @@ function derived(computes, table) {
       }
     });
   }
-  return table;
+  return table2;
 }
 function defineBound(proto, key, fn) {
   Object.defineProperty(proto, key, {
@@ -19721,7 +19721,7 @@ function date4(params) {
   return _coercedDate(ZodDate, params);
 }
 
-// node_modules/.pnpm/@rafaelsilvalor+tyto-core@0.55.0/node_modules/@rafaelsilvalor/tyto-core/dist/chunk-IT6P3KDS.js
+// node_modules/.pnpm/@rafaelsilvalor+tyto-core@0.59.0/node_modules/@rafaelsilvalor/tyto-core/dist/chunk-NUEMZ7BR.js
 var SVG_MARKUP_WAY_OUT = "only flat shapes painted by presentation attributes are inlined: draw it as a contour (a vector of kind 'path'), place it as a PNG, or re-export it from Illustrator with Styling set to Presentation Attributes";
 var diagnosticCodes = {
   // Three syntax codes and not one, because fatality is a property of the code and one
@@ -19784,6 +19784,24 @@ var diagnosticCodes = {
     spec: "docs/brief-language.md",
     fatal: false,
     fatality: "The value of one slot; it stays unset and the rest of the artwork is drawn anyway."
+  },
+  E_BAD_COMUM: {
+    severity: "error",
+    summary: "A `::comum` line, which closes the slides, carries text or adjustments, or is written where there are no slides to close.",
+    template: "'::comum' {problem}.",
+    spec: "docs/brief-language.md",
+    fatal: false,
+    fatality: "One line: what it carries is ignored, and a misplaced one closes nothing while the rest of the brief is read as written."
+  },
+  // An error, not a warning (ADR 0227): an anchor that places nothing would leave the block
+  // off that artwork without a word.
+  E_BAD_BLOCK_NAME: {
+    severity: "error",
+    summary: "A shared block's name, or an empty directive that places one on a slide, does not name a shared block once.",
+    template: "'::{slot}' {problem}.",
+    spec: "docs/adr/0227-shared-and-slide-blocks-add-up-and-a-named-block-is-placed-by-name.md",
+    fatal: false,
+    fatality: "One line: the name or the anchor is ignored, and the shared block is drawn where it was written."
   },
   E_UNKNOWN_SLOT: {
     severity: "error",
@@ -20889,6 +20907,17 @@ var diagnosticCodes = {
     fatal: false,
     fatality: "A warning never replaces a value (ADR 0013)."
   },
+  // Raised by a template the same way (TYTO-837): two colours it draws text in, chosen by a
+  // brief or a configuration (ADR 0226), are too close to read well. A warning: the person
+  // chose the colours, and the frame is drawn in them.
+  W_TEMPLATE_LOW_CONTRAST: {
+    severity: "warning",
+    summary: "Two colours an artwork draws text in have too little contrast to read well.",
+    template: "Artwork '{artwork}' in format '{format}': '{foreground}' on '{background}' has a contrast of {ratio}:1, too little for template '{template}' to read well; the colours are kept.",
+    spec: "docs/adr/0058-a-template-reports-warnings-beside-its-frame.md",
+    fatal: false,
+    fatality: "A warning never replaces a value (ADR 0013)."
+  },
   W_EXTERNAL_ART_MISSING: {
     severity: "warning",
     summary: "A slot whose art is painted outside Tyto has no file yet, and an outlined box stands in for it (ADR 0220).",
@@ -20909,7 +20938,7 @@ var diagnosticCodes = {
   },
   W_TEMPLATE_VALUE_INVALID: {
     severity: "warning",
-    summary: "A configuration sets a declared value to one of the wrong kind or outside its limits.",
+    summary: "A configuration or a brief's frontmatter sets a declared value to one of the wrong kind or outside its limits.",
     template: "Value '{name}' of template '{template}' {problem}; the template's default is used.",
     spec: "docs/adr/0153-a-template-declares-its-configurable-values-in-its-manifest.md",
     fatal: false,
@@ -22270,7 +22299,7 @@ function runsOf(text2, base2, options = {}) {
   return runs;
 }
 
-// node_modules/.pnpm/@rafaelsilvalor+tyto-core@0.55.0/node_modules/@rafaelsilvalor/tyto-core/dist/template.js
+// node_modules/.pnpm/@rafaelsilvalor+tyto-core@0.59.0/node_modules/@rafaelsilvalor/tyto-core/dist/template.js
 function base(options) {
   return {
     transform: { ...identityTransform, ...options.transform },
@@ -22372,7 +22401,7 @@ function frame(options) {
   };
 }
 
-// node_modules/.pnpm/@rafaelsilvalor+tyto-house-style@0.6.8/node_modules/@rafaelsilvalor/tyto-house-style/dist/chunk-3KKHXN6D.js
+// node_modules/.pnpm/@rafaelsilvalor+tyto-house-style@0.9.1/node_modules/@rafaelsilvalor/tyto-house-style/dist/chunk-3KKHXN6D.js
 var PAPER = "#fbfbfb";
 var INK = "#000000";
 var ZEBRA = "#f2f2f4";
@@ -22409,7 +22438,7 @@ var BODY = {
 };
 var OPTICAL_DROP = 0.15;
 
-// node_modules/.pnpm/@rafaelsilvalor+tyto-template-kit@0.15.0/node_modules/@rafaelsilvalor/tyto-template-kit/dist/index.js
+// node_modules/.pnpm/@rafaelsilvalor+tyto-template-kit@0.25.0/node_modules/@rafaelsilvalor/tyto-template-kit/dist/index.js
 function shifted(draft, dx, dy) {
   const transform2 = {
     ...draft.transform,
@@ -22531,28 +22560,6 @@ function mark(shape, height, fill, name) {
     })
   );
 }
-function bandedPage(options) {
-  const { edges, header: header2, footer: footer2, middle } = options;
-  const headerY = edges.top + (header2.band - header2.item.height) / 2;
-  const top = edges.top + header2.band;
-  const bottom = options.size.h - edges.bottom - footer2.height;
-  const middleY = Math.max(top, top + (bottom - top - middle.height) / 2);
-  return [
-    at(edges.side, headerY, header2.item),
-    at(edges.side, middleY, middle),
-    at(edges.side, bottom, footer2)
-  ];
-}
-function sealed(size, seal) {
-  if (seal === void 0) return { size, seal: [] };
-  const band = { w: size.w, h: seal.height };
-  const art = block(
-    band.w,
-    band.h,
-    image({ name: "seal", asset: seal.asset, size: band, fit: "cover" })
-  );
-  return { size: { w: size.w, h: size.h - seal.height }, seal: [at(0, size.h - seal.height, art)] };
-}
 var FIELD_SEPARATOR = "|";
 function rowGroups(text2, fieldCount, grouped, headingFields = 1) {
   const result = [];
@@ -22625,15 +22632,15 @@ function sliceOf(inline, part, whole) {
   };
 }
 function trimEnds(field) {
-  const trimmed = [...field];
-  const first = trimmed[0];
-  if (first?.kind === "text") trimmed[0] = { ...first, value: first.value.replace(/^\s+/u, "") };
-  const lastIndex = trimmed.length - 1;
-  const final = trimmed[lastIndex];
+  const trimmed2 = [...field];
+  const first = trimmed2[0];
+  if (first?.kind === "text") trimmed2[0] = { ...first, value: first.value.replace(/^\s+/u, "") };
+  const lastIndex = trimmed2.length - 1;
+  const final = trimmed2[lastIndex];
   if (final?.kind === "text") {
-    trimmed[lastIndex] = { ...final, value: final.value.replace(/\s+$/u, "") };
+    trimmed2[lastIndex] = { ...final, value: final.value.replace(/\s+$/u, "") };
   }
-  return trimmed.filter((inline) => inline.kind !== "text" || inline.value !== "");
+  return trimmed2.filter((inline) => inline.kind !== "text" || inline.value !== "");
 }
 function atLeastOne(runs) {
   const [first, ...rest] = runs;
@@ -22675,6 +22682,28 @@ function naturalWidth(value, style3, measure) {
   if (runs === void 0) return 0;
   const measured = measure(text({ runs, box: {} }));
   return measured === void 0 ? void 0 : Math.ceil(measured.width);
+}
+function bandedPage(options) {
+  const { edges, header: header2, footer: footer2, middle } = options;
+  const headerY = edges.top + (header2.band - header2.item.height) / 2;
+  const top = edges.top + header2.band;
+  const bottom = options.size.h - edges.bottom - footer2.height;
+  const middleY = Math.max(top, top + (bottom - top - middle.height) / 2);
+  return [
+    at(edges.side, headerY, header2.item),
+    at(edges.side, middleY, middle),
+    at(edges.side, bottom, footer2)
+  ];
+}
+function sealed(size, seal) {
+  if (seal === void 0) return { size, seal: [] };
+  const band = { w: size.w, h: seal.height };
+  const art = block(
+    band.w,
+    band.h,
+    image({ name: "seal", asset: seal.asset, size: band, fit: "cover" })
+  );
+  return { size: { w: size.w, h: size.h - seal.height }, seal: [at(0, size.h - seal.height, art)] };
 }
 function titleBlock(style3, content) {
   const drawn = [];
@@ -22729,10 +22758,201 @@ function pieceOf(part, content) {
     }
   }
 }
+var NO_PADDING = { top: 0, bottom: 0, left: 0, right: 0 };
+function table(style3, rows, width) {
+  const placed = placeColumns(style3, rows, width);
+  const seen = /* @__PURE__ */ new Map();
+  const drawn = rows.map((row2, index) => {
+    const count = seen.get(row2.kind) ?? 0;
+    seen.set(row2.kind, count + 1);
+    const edges = { first: index === 0, last: index === rows.length - 1 };
+    return row2.span === true ? drawBand(style3, placed, row2, count, edges, width) : drawRow(style3, placed, row2, count, edges, width);
+  });
+  return stack({
+    ...style3.names.table === void 0 ? {} : { name: style3.names.table },
+    gap: style3.rowGap,
+    items: drawn
+  });
+}
+function gapOf(style3) {
+  return (style3.layering ?? "side-by-side") === "side-by-side" ? style3.columnGap ?? 0 : 0;
+}
+function paddingOf(column) {
+  return column.padding ?? NO_PADDING;
+}
+function placeColumns(style3, rows, width) {
+  const gap = gapOf(style3);
+  const widths = style3.columns.map((column, index) => {
+    if (typeof column.width === "number" || column.width === "fill") return column.width;
+    const padding = paddingOf(column);
+    let widest = 0;
+    for (const row2 of rows) {
+      if (row2.span === true) continue;
+      const natural = row2.cells[index]?.naturalWidth?.();
+      if (natural !== void 0) widest = Math.max(widest, natural);
+    }
+    return Math.max(column.width.measured.min, padding.left + widest + padding.right);
+  });
+  const taken = widths.reduce((sum, each) => sum + (each === "fill" ? 0 : each), 0);
+  const fill = width - taken - gap * Math.max(0, style3.columns.length - 1);
+  let x = 0;
+  return style3.columns.map((column, index) => {
+    const own2 = widths[index];
+    const columnWidth = own2 === "fill" ? fill : own2;
+    const result = { column, index, x, width: columnWidth };
+    x += columnWidth + gap;
+    return result;
+  });
+}
+function fillOf(style3, kind, column, count) {
+  const paint = style3.kinds[kind];
+  if (paint === void 0) return void 0;
+  if (paint.zebra !== void 0 && paint.zebra.length > 0) {
+    return paint.zebra[count % paint.zebra.length] ?? void 0;
+  }
+  return typeof paint.fill === "string" ? paint.fill : paint.fill?.[column];
+}
+function cornersOf(style3, column, edges, left, right) {
+  if (column?.radius !== void 0) return column.radius;
+  const corners = style3.corners;
+  if (corners === void 0) return void 0;
+  if (corners.at === "every-cell") return corners.radius;
+  const r = corners.radius;
+  const tuple2 = [
+    edges.first && left ? r : 0,
+    edges.first && right ? r : 0,
+    edges.last && right ? r : 0,
+    edges.last && left ? r : 0
+  ];
+  return tuple2.every((each) => each === 0) ? void 0 : tuple2;
+}
+function drawRow(style3, placed, row2, count, edges, width) {
+  const measured = placed.map((cell) => {
+    const content = row2.cells[cell.index];
+    if (content === void 0) return void 0;
+    const padding = paddingOf(cell.column);
+    return content.draw(cell.width - padding.left - padding.right);
+  });
+  const height = placed.reduce(
+    (tallest, cell, index) => {
+      const content = row2.cells[cell.index];
+      const own2 = measured[index];
+      if (content === void 0 || own2 === void 0 || content.sizesRow === false) {
+        return tallest;
+      }
+      const padding = paddingOf(cell.column);
+      return Math.max(tallest, own2.height + padding.top + padding.bottom);
+    },
+    minHeightOf(style3, row2.kind)
+  );
+  const overlap = style3.layering === "overlap";
+  const drawn = placed.map((cell) => {
+    const padding = paddingOf(cell.column);
+    const inner = {
+      w: cell.width - padding.left - padding.right,
+      h: height - padding.top - padding.bottom
+    };
+    const content = row2.cells[cell.index]?.draw(inner.w, inner.h);
+    const origin = overlap ? 0 : cell.x;
+    const start = overlap ? cell.x : 0;
+    const shapeWidth = overlap ? cell.x + cell.width : cell.width;
+    const fill = fillOf(style3, row2.kind, cell.index, count);
+    const corners = cornersOf(
+      style3,
+      cell.column,
+      edges,
+      cell.index === 0,
+      cell.index === placed.length - 1
+    );
+    return shift(
+      cellGroup(cell.column.name, { w: shapeWidth, h: height }, fill, corners, content, {
+        x: start + padding.left,
+        y: padding.top + offsetOf2(cell.column.valign, inner.h, content)
+      }),
+      origin,
+      0
+    );
+  });
+  return block(
+    width,
+    height,
+    group({
+      name: rowNameOf(style3, row2.kind),
+      // Painted in order, so under `overlap` the earlier cells go last and cover the
+      // rounded left ends of the later ones.
+      children: overlap ? drawn.reverse() : drawn
+    })
+  );
+}
+function drawBand(style3, placed, row2, count, edges, width) {
+  const first = placed[0]?.column;
+  const last = placed[placed.length - 1]?.column;
+  const padding = {
+    top: first === void 0 ? 0 : paddingOf(first).top,
+    bottom: first === void 0 ? 0 : paddingOf(first).bottom,
+    left: first === void 0 ? 0 : paddingOf(first).left,
+    right: last === void 0 ? 0 : paddingOf(last).right
+  };
+  const innerWidth = width - padding.left - padding.right;
+  const content = row2.cells[0];
+  const measured = content?.draw(innerWidth);
+  const height = Math.max(
+    minHeightOf(style3, row2.kind),
+    measured === void 0 || content?.sizesRow === false ? 0 : measured.height + padding.top + padding.bottom
+  );
+  const innerHeight = height - padding.top - padding.bottom;
+  const drawn = content?.draw(innerWidth, innerHeight);
+  const corners = cornersOf(style3, void 0, edges, true, true);
+  return block(
+    width,
+    height,
+    group({
+      name: rowNameOf(style3, row2.kind),
+      children: [
+        cellGroup(
+          style3.names.band ?? "band",
+          { w: width, h: height },
+          fillOf(style3, row2.kind, 0, count),
+          corners,
+          drawn,
+          { x: padding.left, y: padding.top + offsetOf2(first?.valign, innerHeight, drawn) }
+        )
+      ]
+    })
+  );
+}
+function rowNameOf(style3, kind) {
+  return style3.kinds[kind]?.name ?? style3.names.row;
+}
+function minHeightOf(style3, kind) {
+  return style3.kinds[kind]?.minHeight ?? style3.minRowHeight;
+}
+function offsetOf2(valign, room, content) {
+  if (content === void 0) return 0;
+  const spare = room - content.height;
+  if (spare <= 0) return 0;
+  const where = valign ?? "middle";
+  if (where === "top") return 0;
+  return where === "bottom" ? spare : spare / 2;
+}
+function cellGroup(name, size, fill, corners, content, place) {
+  const children = [];
+  if (fill !== void 0) {
+    children.push(
+      rect({ size, ...corners === void 0 ? {} : { radius: corners }, fill: solid(fill) })
+    );
+  }
+  if (content !== void 0) children.push(shift(content.draft, place.x, place.y));
+  return group({ name, children });
+}
+function shift(draft, dx, dy) {
+  if (dx === 0 && dy === 0) return draft;
+  return at(dx, dy, block(0, 0, draft));
+}
 function rewritten(value, rewrite) {
   return rewrite === void 0 || value.length === 0 ? value : rewrite(value);
 }
-function pillTable(style3, content) {
+function slotTable(style3, content) {
   const fieldCount = style3.columns.reduce((sum, column) => sum + fieldsOf(column), 0);
   const caption = style3.groups?.caption;
   const groups = rowGroups(
@@ -22743,12 +22963,11 @@ function pillTable(style3, content) {
   );
   const drawRows = (rows, name, gap, band) => {
     const width = rowWidth(style3, rows, content);
-    const placed = placeColumns(style3, width);
-    const drawn = stack({
-      ...name === void 0 ? {} : { name },
-      gap,
-      items: rows.map((fields2) => drawRow(style3, placed, fields2, width, content.measure))
-    });
+    const drawn = table(
+      { ...tableStyleOf(style3, name), rowGap: gap },
+      rows.map((fields2) => ({ kind: ROW, cells: cellsOf(style3, fields2, content.measure) })),
+      width
+    );
     if (caption === void 0 || band === void 0) return centred(drawn, content.width);
     return centred(
       stack({ gap: caption.gap, items: [captionBand(caption, band, width), drawn] }),
@@ -22816,7 +23035,7 @@ function captionBand(caption, value, width) {
           radius: caption.shape.radius,
           fill: solid(caption.shape.fill)
         }),
-        shift(words.draft, caption.padding.left, 0)
+        shift2(words.draft, caption.padding.left, 0)
       ]
     })
   );
@@ -22862,53 +23081,48 @@ function naturalRowWidth(style3, fields2, measure) {
 function fieldsOf(column) {
   return column.kind === "label" ? 1 : column.lines.length;
 }
-function placeColumns(style3, width) {
-  const gap = style3.layering === "side-by-side" ? style3.columnGap ?? 0 : 0;
-  const fixed = style3.columns.reduce(
-    (sum, column) => sum + (column.width === "fill" ? 0 : column.width),
-    0
-  );
-  const fill = width - fixed - gap * Math.max(0, style3.columns.length - 1);
-  let x = 0;
-  return style3.columns.map((column) => {
-    const columnWidth = column.width === "fill" ? fill : column.width;
-    const result = { column, x, width: columnWidth };
-    x += columnWidth + gap;
-    return result;
-  });
+function tableStyleOf(style3, name) {
+  return {
+    columns: style3.columns.map((column) => ({
+      name: column.name,
+      width: column.width,
+      ...column.kind === "lines" ? { padding: column.padding } : {},
+      ...column.shape === void 0 ? {} : { radius: column.shape.radius }
+    })),
+    kinds: { [ROW]: { fill: style3.columns.map((column) => column.shape?.fill) } },
+    layering: style3.layering,
+    ...style3.columnGap === void 0 ? {} : { columnGap: style3.columnGap },
+    rowGap: style3.rowGap,
+    minRowHeight: style3.minRowHeight,
+    names: { ...name === void 0 ? {} : { table: name }, row: style3.names.row }
+  };
 }
-function drawRow(style3, placed, fields2, width, measure) {
+var ROW = "row";
+function cellsOf(style3, fields2, measure) {
   let next = 0;
-  const cells = placed.map((each) => {
-    const count = fieldsOf(each.column);
+  return style3.columns.map((column) => {
+    const count = fieldsOf(column);
     const own2 = Array.from({ length: count }, (_, index) => fields2[next + index] ?? []);
     next += count;
-    return { ...each, fields: own2 };
+    return column.kind === "lines" ? { draw: (width) => linesOf2(column, width, own2, measure) } : labelCell(column, own2[0] ?? []);
   });
-  const stacks = cells.map(
-    (cell) => cell.column.kind === "lines" ? linesOf2(cell.column, cell.width, cell.fields, measure) : void 0
-  );
-  const height = cells.reduce((tallest, cell, index) => {
-    const lines2 = stacks[index];
-    if (lines2 === void 0 || cell.column.kind !== "lines") return tallest;
-    return Math.max(tallest, lines2.height + cell.column.padding.top + cell.column.padding.bottom);
-  }, style3.minRowHeight);
-  const drawn = cells.map(
-    (cell, index) => drawCell(style3, cell, cell.fields, stacks[index], height)
-  );
-  return block(
-    width,
-    height,
-    group({
-      name: style3.names.row,
-      // Painted in order, so under `overlap` the earlier cells go last and cover the
-      // rounded left ends of the later ones.
-      children: style3.layering === "overlap" ? drawn.reverse() : drawn
-    })
-  );
 }
-function linesOf2(column, width, fields2, measure) {
-  const inner = width - column.padding.left - column.padding.right;
+function labelCell(column, value) {
+  return {
+    sizesRow: false,
+    draw: (width, height) => height === void 0 ? block(width, 0, group({ children: [] })) : textBlock(
+      rewritten(value, column.text.rewrite),
+      { w: width, h: height },
+      column.text.style,
+      {
+        name: column.text.name,
+        ...column.text.align === void 0 ? {} : { align: column.text.align },
+        ...column.text.valign === void 0 ? {} : { valign: column.text.valign }
+      }
+    )
+  };
+}
+function linesOf2(column, inner, fields2, measure) {
   return stack({
     gap: column.lineGap,
     items: column.lines.map(
@@ -22925,50 +23139,13 @@ function linesOf2(column, width, fields2, measure) {
     )
   });
 }
-function drawCell(style3, cell, fields2, lines2, height) {
-  const overlap = style3.layering === "overlap";
-  const origin = overlap ? 0 : cell.x;
-  const start = overlap ? cell.x : 0;
-  const shapeWidth = overlap ? cell.x + cell.width : cell.width;
-  const children = [];
-  if (cell.column.shape !== void 0) {
-    children.push(
-      rect({
-        size: { w: shapeWidth, h: height },
-        radius: cell.column.shape.radius,
-        fill: solid(cell.column.shape.fill)
-      })
-    );
-  }
-  if (cell.column.kind === "label") {
-    const words = textBlock(
-      rewritten(fields2[0] ?? [], cell.column.text.rewrite),
-      { w: cell.width, h: height },
-      cell.column.text.style,
-      {
-        name: cell.column.text.name,
-        ...cell.column.text.align === void 0 ? {} : { align: cell.column.text.align },
-        ...cell.column.text.valign === void 0 ? {} : { valign: cell.column.text.valign }
-      }
-    );
-    children.push(shift(words.draft, start, 0));
-  } else if (lines2 !== void 0) {
-    children.push(
-      shift(
-        lines2.draft,
-        start + cell.column.padding.left,
-        cell.column.padding.top + (height - cell.column.padding.top - cell.column.padding.bottom - lines2.height) / 2
-      )
-    );
-  }
-  return shift(group({ name: cell.column.name, children }), origin, 0);
-}
-function shift(draft, dx, dy) {
+function shift2(draft, dx, dy) {
   if (dx === 0 && dy === 0) return draft;
   return at(dx, dy, block(0, 0, draft));
 }
+var NO_FILL = solid({ r: 0, g: 0, b: 0, a: 0 });
 
-// node_modules/.pnpm/@rafaelsilvalor+tyto-house-style@0.6.8/node_modules/@rafaelsilvalor/tyto-house-style/dist/chunk-EIGOHDOF.js
+// node_modules/.pnpm/@rafaelsilvalor+tyto-house-style@0.9.1/node_modules/@rafaelsilvalor/tyto-house-style/dist/chunk-KTMH3XT2.js
 var PLACEHOLDER_LOGO = {
   box: { w: 186.09, h: 376.79 },
   d: (
@@ -23011,7 +23188,7 @@ function signatureOf(kit) {
   return kit.signature ?? PLACEHOLDER_SIGNATURE;
 }
 
-// node_modules/.pnpm/@rafaelsilvalor+tyto-house-style@0.6.8/node_modules/@rafaelsilvalor/tyto-house-style/dist/index.js
+// node_modules/.pnpm/@rafaelsilvalor+tyto-house-style@0.9.1/node_modules/@rafaelsilvalor/tyto-house-style/dist/index.js
 var TITLE_INK = "#7c7c7c";
 var ROW_INK = "#393939";
 var FACE = systemFont("CircularXX");
@@ -23068,7 +23245,7 @@ var TABLE_VALUE_DEFAULTS = {
   "signature-ink": SIGNATURE_INK
 };
 
-// node_modules/.pnpm/@rafaelsilvalor+tyto-house-style@0.6.8/node_modules/@rafaelsilvalor/tyto-house-style/dist/azul.js
+// node_modules/.pnpm/@rafaelsilvalor+tyto-house-style@0.9.1/node_modules/@rafaelsilvalor/tyto-house-style/dist/azul.js
 var PAPER2 = "#ffffff";
 var INK2 = "#009fe3";
 var COVER_INK = "#4a4a4a";
@@ -23270,7 +23447,7 @@ var coverTitle = {
 // src/template.ts
 var build = (context) => {
   const width = context.size.w - MARGIN * 2;
-  const sessions = pillTable(sessionTable(accentOfAzul(context.brand)), {
+  const sessions = slotTable(sessionTable(accentOfAzul(context.brand)), {
     text: richTextOf(context, "lamina") ?? [],
     width,
     measure: context.measure

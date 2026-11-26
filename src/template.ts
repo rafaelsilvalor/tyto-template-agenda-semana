@@ -6,7 +6,7 @@
  * | band   | what                                          | drawn by                               |
  * | ------ | --------------------------------------------- | -------------------------------------- |
  * | header | the logo                                       | `header()` — `azul`                   |
- * | middle | the cover (first slide only), then the table  | `titleBlock(coverTitle)`, `pillTable(sessionTable)` |
+ * | middle | the cover (first slide only), then the table  | `titleBlock(coverTitle)`, `slotTable(sessionTable)` |
  * | footer | the signature, and the arrow unless last slide   | `footer()` — `azul`                   |
  * | seal   | last slide only, when the brief has a `selo`  | `sealed` — kit; `sealOf` — house       |
  *
@@ -31,14 +31,14 @@ import {
   header,
   sessionTable,
 } from '@tyto/house-style/azul';
-import { type Block, bandedPage, pillTable, stack, titleBlock, sealed } from '@tyto/template-kit';
+import { type Block, bandedPage, sealed, slotTable, stack, titleBlock } from '@tyto/template-kit';
 
 import type { RichText, TemplateBuild, TemplateContext } from '@tyto/core';
 
 export const build: TemplateBuild = (context: TemplateContext) => {
   const width = context.size.w - MARGIN * 2;
 
-  const sessions = pillTable(sessionTable(accentOfAzul(context.brand)), {
+  const sessions = slotTable(sessionTable(accentOfAzul(context.brand)), {
     text: richTextOf(context, 'lamina') ?? [],
     width,
     measure: context.measure,
